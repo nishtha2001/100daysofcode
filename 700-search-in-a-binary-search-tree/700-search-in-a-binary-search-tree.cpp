@@ -11,25 +11,27 @@
  */
 
 class Solution {
-      void dfs(TreeNode* root, int val, TreeNode*& res) {
-        if(!root) return;
-    
-        if(root->val == val) {
+    void dfs(TreeNode* root, int val, TreeNode* &res){
+        if(!root)
+           return;
+        
+        if(root->val==val){
             res = root;
-        } else if(root->val > val) {
+        }
+        else if(root->val  > val){
             dfs(root->left, val, res);
-        } else if(root->val < val) {
+            
+        }
+        else if(root-> val< val){
             dfs(root->right, val, res);
         }
-        
     }
+
 public:
     
     TreeNode* searchBST(TreeNode* root, int val) {
-    TreeNode* res = nullptr;
-        dfs(root, val, res);
-        
+    TreeNode *res = nullptr;
+       dfs(root, val, res);
         return res;
-  
     }
 };
