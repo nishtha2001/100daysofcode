@@ -22,8 +22,9 @@ public:
             for(int j = 0; j < grid[0].size(); j++) {
                
                 if(grid[i][j] == '1') {
+                    ans++;
                     DFS(grid, i, j);
-                    ++ans;
+                    
                 } 
             }
         }
