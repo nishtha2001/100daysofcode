@@ -1,7 +1,7 @@
 class Solution {
 public:
-    int scoreOfParentheses(string s) {
-        
+    int scoreOfParentheses(string s) 
+    {
         stack<int> st;
         int ans = 0;
         
