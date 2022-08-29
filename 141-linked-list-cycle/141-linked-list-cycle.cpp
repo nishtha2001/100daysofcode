@@ -13,13 +13,13 @@ public:
         if(!head)
             return false;
         
-        ListNode* p= head, *q=head;
+        ListNode* fast= head, *slow=head;
         
-        while(q->next && q->next->next){
-             p=p->next;
-            q=q->next->next;
+        while(fast->next && fast->next->next){
+             slow=slow->next;
+            fast=fast->next->next;
             
-            if(p==q)
+            if(fast==slow)
                 return true;
         }
      return false;   
