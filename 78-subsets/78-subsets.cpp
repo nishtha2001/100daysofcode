@@ -3,23 +3,23 @@ public:
     
     vector<vector<int>> ans;
     
-    void solve(int i, vector<int>&arr, vector<int>&temp)
-    {
-        if(i == arr.size()) 
-        {
+    void solve(int idx, vector<int>&temp, vector<int>& arr){
+        if(arr.size()==idx){
             ans.push_back(temp);
             return;
         }
-        temp.push_back(arr[i]);
-        solve(i + 1, arr, temp);
+        temp.push_back(arr[idx]);
+        solve(idx+1, temp,arr);
         
         temp.pop_back();
-        solve(i + 1, arr, temp);
+        solve(idx+1, temp,arr);
         
     }
+    
     vector<vector<int>> subsets(vector<int>& arr) {
-        vector<int> temp;
-        solve(0, arr, temp); 
+        
+        vector<int>temp;
+        solve(0, temp, arr);
         return ans;
     }
 };
