@@ -1,21 +1,45 @@
 class Solution {
 public:
-    void solve(int col, vector<string>& board, vector<vector<string >>& ans, vector<int>& left,  vector<int>upperDiagonal, vector<int>& lowerDiagonal, int n) {
-      if (col == n) {
-          ans.push_back(board);
-          return;
+    
+    bool isSafe(int row, int col, vector<string>board, int n){
+        int i=row;
+        int j=col;
+        
+        while (row >= 0 && col >= 0) {
+            if(board[row][col] == 'Q')
+                return false;
+             row--;
+             col--;
       }
+        
+        col=j;;
+        row=i;
+        while (col >= 0) {
+            if(board[row][col] == 'Q')
+                return false;
+        col--;
+      }
+        
+        row=i;
+        col=j;
+        while (row < n && col >= 0) {
+            if(board[row][col] == 'Q')
+                return false;
+        row++;
+        col--;
+      }
+      return true;
+    }
+    void solve(int col,  vector<string>&board, vector<vector<string>> &ans, int n){
+        if(col==n){
+            ans.push_back(board);
+            return;
+        }
         for(int row=0;row<n;row++){
-            if(left[row]==0 && lowerDiagonal[row+col]==0 && upperDiagonal[n-1+col-row]==0){
+            if(isSafe(row, col, board, n)){
                 board[row][col]='Q';
-                left[row]=1;
-                lowerDiagonal[row+col]=1;
-                upperDiagonal[n-1+col-row]=1;
-                solve(col+1,board,ans,left,upperDiagonal,lowerDiagonal, n);
+                solve(col+1, board, ans, n);
                 board[row][col]='.';
-                left[row]=0;
-                lowerDiagonal[row+col]=0;
-                upperDiagonal[n-1+col-row]=0;
                 
             }
         }
@@ -28,10 +52,8 @@ public:
         for(int i=0;i<n;i++){
             board[i]=s;
         }
-        vector<int>left(n,0), upperDiagonal(2*n-1,0), lowerDiagonal(2*n-1,0);
-        solve(0,board,ans,left,upperDiagonal,lowerDiagonal, n);
+        solve(0,board,ans,n);
         return ans;
-        
         
     }
 };
